@@ -1,0 +1,7 @@
+{
+  "name": "anna-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Портфолио Анны Богатырёвой — статичный сайт",
+  "scripts": { "build": "node build.js" }
+}
