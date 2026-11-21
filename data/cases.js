@@ -173,7 +173,7 @@ module.exports = [
     "linkUrl": "https://kinesiolab-school.ru/"
   },
   {
-    "id": "posters",
+    "id": "animalposters",
     "type": "poster",
     "title": "LIZARD | SHARKS | SPIDERS",
     "sub": "Серия брутальных постеров",
@@ -250,7 +250,7 @@ module.exports = [
     "linkUrl": ""
   },
   {
-    "id": "posters",
+    "id": "femposters",
     "type": "poster",
     "title": "USE YOUR VOICE",
     "sub": "Постер посвященный Международному женскому дню и феминизму",
