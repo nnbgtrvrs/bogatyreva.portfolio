@@ -292,6 +292,12 @@ module.exports = [
         6,
         "3/4",
         "assets/img/use-your-voice.webp"
+      ],
+      [
+        "USE YOUR VOICE 2",
+        6,
+        "3/4",
+        "assets/img/crayon.webp"
       ]
     ],
     "nums": [],
