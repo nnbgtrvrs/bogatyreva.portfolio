@@ -20,6 +20,10 @@ const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g,
 const P = s => esc(s).replace(/\[([^\]]*)\]/g, m => { placeholders++; return '<span class="pl">' + m + '</span>'; }).replace(/\n/g, '<br>');
 const N = i => String(i + 1).padStart(2, '0');
 const TL = { web: 'Веб', poster: 'Постеры', product: 'Продукт', smm: 'Соцсети' };
+
+// Стрелки рисуем SVG-ом: символы ↗ ← и т.п. на iPhone превращаются в эмодзи-«кнопки»
+const AR = { ne: 'M5 19L19 5M8 5H19V16', down: 'M12 4V20M5 13L12 20L19 13', left: 'M20 12H4M11 5L4 12L11 19', right: 'M4 12H20M13 5L20 12L13 19', up: 'M12 20V4M5 11L12 4L19 11' };
+const ar = d => `<svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="${AR[d]}"/></svg>`;
 const checkFile = f => { if (f && !fs.existsSync(path.join(ROOT, f))) missing.push(f); };
 
 const C = S.contacts;
@@ -59,8 +63,8 @@ ${o.extra || ''}${metrika}
 const nav = b => `<nav>
  <a class="logo" href="${b}index.html"><span>АННА Б.®</span><span class="m">Portfolio/${year}</span></a>
  <a class="l m" href="${b}index.html#works">Работы</a><a class="l m" href="${b}index.html#services">Услуги</a><a class="l m" href="${b}index.html#process">Процесс</a><a class="l m" href="#contact">Контакт</a>
- <div class="st m"><i class="dot"></i>${esc(S.city)} → мир · UTC+5</div>
- <a class="go" href="#contact">ЗАКАЗАТЬ ПРОЕКТ ↗</a>
+ <div class="st m"><i class="dot"></i>${esc(S.city)} ${ar('right')} мир · UTC+5</div>
+ <a class="go" href="#contact">ЗАКАЗАТЬ ПРОЕКТ ${ar('ne')}</a>
 </nav>
 `;
 
@@ -70,13 +74,13 @@ const contact = () => `<section id="contact" class="fin">
   <a href="${esc(C.telegram.url)}" target="_blank" rel="noopener">TELEGRAM<span class="m">${esc(C.telegram.label)}</span></a>
   <a href="${esc(C.email.url)}">EMAIL<span class="m">${esc(C.email.label)}</span></a>
   <a href="${esc(C.behance.url)}" target="_blank" rel="noopener">BEHANCE<span class="m">${esc(C.behance.label)}</span></a>
-  <a href="${esc(C.telegram.url)}" target="_blank" rel="noopener">НАПИСАТЬ ↗<span class="m" style="color:var(--acid)">${esc(C.note)}</span></a>
+  <a href="${esc(C.telegram.url)}" target="_blank" rel="noopener">НАПИСАТЬ ${ar('ne')}<span class="m" style="color:var(--acid)">${esc(C.note)}</span></a>
  </div>
 </section>
 `;
 
-const footer = b => `<footer><div class="row m"><span>© ${year} ${esc(S.name)} · ${esc(S.city)}</span><a href="#top">↑ Наверх</a></div><div class="xl">АННА Б.</div></footer>
-<div id="cur">СМОТРЕТЬ ↗</div>
+const footer = b => `<footer><div class="row m"><span>© ${year} ${esc(S.name)} · ${esc(S.city)}</span><a href="#top">${ar('up')} Наверх</a></div><div class="xl">АННА Б.</div></footer>
+<div id="cur">СМОТРЕТЬ ${ar('ne')}</div>
 <script src="${b}assets/js/main.js" defer></script>
 </body>
 </html>
@@ -101,7 +105,7 @@ function home() {
     : `<div class="photo"><span class="m">[Фото 4:5<br>Анна, портрет]</span><i class="m">Это я</i></div>`;
   if (!ab.photo) placeholders++;
   const stats = S.stats.map(s => `<div${s.accent ? ' class="acid"' : ''}><b>${esc(s.n)}</b><span class="m">${P(s.label)}</span></div>`).join('\n ');
-  const services = S.services.map((s, i) => `<a class="srv" href="#contact"><div class="n">${N(i)}</div><div><h3>${P(s.title)}</h3></div><div class="m" style="font-weight:500">${P(s.text)}</div><div class="m">${P(s.price)}${s.term ? '<br>' + P(s.term) : ''}</div><div class="go">↗</div></a>`).join('\n ');
+  const services = S.services.map((s, i) => `<a class="srv" href="#contact"><div class="n">${N(i)}</div><div><h3>${P(s.title)}</h3></div><div class="m" style="font-weight:500">${P(s.text)}</div><div class="m">${P(s.price)}${s.term ? '<br>' + P(s.term) : ''}</div><div class="go">${ar('ne')}</div></a>`).join('\n ');
   const proc = S.process.map((p, i) => {
     const k = i % 4, cls = k === 1 ? ' class="acid"' : k === 3 ? ' class="inv"' : '';
     const st = k === 1 ? ' style="-webkit-text-stroke-color:#0B0B0B"' : k === 3 ? ' style="-webkit-text-stroke-color:var(--acid)"' : '';
@@ -121,8 +125,8 @@ function home() {
 <section class="info">
  <div><p>${P(S.hero.intro)}</p></div>
  <div><span class="m" style="color:var(--mute)">Статус</span><span class="big" style="display:flex;gap:10px;align-items:center;font-size:20px"><i class="dot"></i>${P(S.hero.status)}</span></div>
- <a class="inv cta" href="#works"><span class="m" style="color:var(--acid)">01</span><span class="big">СМОТРЕТЬ<br>РАБОТЫ ↓</span></a>
- <a class="acid cta" href="#contact"><span class="m">02</span><span class="big">ЗАКАЗАТЬ<br>ПРОЕКТ ↗</span></a>
+ <a class="inv cta" href="#works"><span class="m" style="color:var(--acid)">01</span><span class="big">СМОТРЕТЬ<br>РАБОТЫ ${ar('down')}</span></a>
+ <a class="acid cta" href="#contact"><span class="m">02</span><span class="big">ЗАКАЗАТЬ<br>ПРОЕКТ ${ar('ne')}</span></a>
 </section>
 <div class="mq" aria-hidden="true"><div>${esc(mtxt)}</div><div>${esc(mtxt)}</div></div>
 
@@ -169,8 +173,8 @@ function casePage(c, i) {
   const meta = [['Клиент', c.client], ['Роль', c.role], ['Срок', [c.term, c.year].filter(Boolean).join(' · ')], ['Инструменты', c.tools]]
     .filter(x => x[1]).map(x => `<div><span class="m">${x[0]}</span><div>${P(x[1])}</div></div>`).join('');
   const link = c.link ? `<div style="margin-top:16px">${c.linkUrl
-    ? `<a class="chip m" style="display:inline-block" href="${esc(c.linkUrl)}" target="_blank" rel="noopener">${P(c.link)} ↗</a>`
-    : `<span class="chip m" style="display:inline-block">${P(c.link)} ↗</span>`}</div>` : '';
+    ? `<a class="chip m" style="display:inline-block" href="${esc(c.linkUrl)}" target="_blank" rel="noopener">${P(c.link)} ${ar('ne')}</a>`
+    : `<span class="chip m" style="display:inline-block">${P(c.link)} ${ar('ne')}</span>`}</div>` : '';
   const tl3 = [['Задача', c.task, ''], ['Решение', c.sol, 'acid'], ['Результат', c.res, 'inv']]
     .map(x => `<div class="${x[2]}"><span class="m">${x[0]}</span><h3>${x[0].toUpperCase()}</h3><p>${P(x[1])}</p></div>`).join('');
   const gal = (c.gal || []).map(g => {
@@ -180,11 +184,11 @@ function casePage(c, i) {
   const nums = (c.nums || []).map((x, k) => `<div${k === 1 ? ' class="acid"' : ''}><b>${P(x[0])}</b><span class="m">${P(x[1])}</span></div>`).join('');
   const steps = (c.steps || []).map((s, k) => `<div><span class="m">Шаг ${N(k)}</span><b>${P(s[0])}</b><p>${P(s[1])}</p></div>`).join('');
   const nextHtml = CASES.length > 1
-    ? `<a href="${nx.id}.html"><span class="m">Следующий кейс ${N(nn)}</span><h3>${P(nx.title)} →</h3></a>` : `<a href="${b}index.html#works"><span class="m">Все работы</span><h3>НА ГЛАВНУЮ →</h3></a>`;
+    ? `<a href="${nx.id}.html"><span class="m">Следующий кейс ${N(nn)}</span><h3>${P(nx.title)} ${ar('right')}</h3></a>` : `<a href="${b}index.html#works"><span class="m">Все работы</span><h3>НА ГЛАВНУЮ ${ar('right')}</h3></a>`;
 
   return head({ title: `${c.title} — ${S.name}`, desc: c.sub, base: b, path: `cases/${c.id}.html` }) + nav(b) + `
 <main>
-<div class="cv-head"><a class="back" href="${b}index.html#works"><span class="m">Все работы</span><b>←</b></a><div><span class="m">Кейс ${N(i)} / ${TL[c.type] || ''}</span><h1>${P(c.title)}</h1><p class="sub">${P(c.sub)}</p><div class="tags m">${tagsHtml(c)}</div>${link}</div></div>
+<div class="cv-head"><a class="back" href="${b}index.html#works"><span class="m">Все работы</span><b>${ar('left')}</b></a><div><span class="m">Кейс ${N(i)} / ${TL[c.type] || ''}</span><h1>${P(c.title)}</h1><p class="sub">${P(c.sub)}</p><div class="tags m">${tagsHtml(c)}</div>${link}</div></div>
 <div class="meta">${meta}</div>
 <div class="cover"><div class="art">${art(c, b)}</div></div>
 <div class="tl3">${tl3}</div>
@@ -193,7 +197,7 @@ ${steps ? `<div class="steps">${steps}</div>` : ''}
 ${gal ? `<div class="gal">${gal}</div>` : ''}
 ${nums ? `<div class="nums">${nums}</div>` : ''}
 ${c.quote ? `<div class="quote"><q>${P(c.quote)}</q><span class="m">— ${P(c.who)}</span></div>` : ''}
-<div class="next"><a class="acid" href="#contact"><span class="m">Нравится?</span><h3>ХОЧУ<br>ТАКОЙ ЖЕ ↗</h3></a>${nextHtml}</div>
+<div class="next"><a class="acid" href="#contact"><span class="m">Нравится?</span><h3>ХОЧУ<br>ТАКОЙ ЖЕ ${ar('ne')}</h3></a>${nextHtml}</div>
 </main>
 ` + contact() + footer(b);
 }
