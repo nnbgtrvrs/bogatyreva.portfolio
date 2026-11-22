@@ -73,7 +73,7 @@ module.exports = [
         "pic",
         6,
         "4/3",
-        "assets/img/components.png"
+        "assets/img/map.png"
       ]
     ],
     "nums": [
@@ -145,7 +145,7 @@ module.exports = [
         "",
         6,
         "3/4",
-        "assets/img/full-wireframes.png"
+        "assets/img/wireframes.png"
       ],
       [
         "",
@@ -156,7 +156,7 @@ module.exports = [
       [
         "",
         12,
-        "3/4",
+        "4/3",
         "assets/img/teachers.png"
       ]
     ],
@@ -322,6 +322,10 @@ module.exports = [
     "ctx": "",
     "steps": [
       [
+        "Бриф",
+        "Изучила специфику студии, её услуги, целевую аудиторию и задачи сайта. Определила, какие преимущества и компетенции необходимо донести до потенциального клиента, чтобы сформировать доверие ещё до первого контакта."
+      ],
+      [
         "Структура",
         "Проанализировала 6 конкурентов. Выстроила лендинг вокруг услуг, портфолио, преимуществ команды и контакта."
       ],
@@ -339,7 +343,7 @@ module.exports = [
         "",
         12,
         "16/8",
-        "assets/img/services.webp"
+        "assets/img/services-startup.webp"
       ],
       [
         "",
@@ -350,7 +354,7 @@ module.exports = [
       [
         "",
         12,
-        "3/4",
+        "4/5",
         "assets/img/full-startup.png"
       ]
     ],
