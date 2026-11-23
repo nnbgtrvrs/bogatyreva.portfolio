@@ -61,7 +61,7 @@ ${o.extra || ''}${metrika}
 }
 
 const nav = b => `<nav>
- <a class="logo" href="${b}index.html"><span>АННА Б.®</span><span class="m">Portfolio/${year}</span></a>
+ <a class="logo" href="${b}index.html"><span>АННА Б.</span><span class="m">Portfolio/${year}</span></a>
  <a class="l m" href="${b}index.html#works">Работы</a><a class="l m" href="${b}index.html#services">Услуги</a><a class="l m" href="${b}index.html#process">Процесс</a><a class="l m" href="#contact">Контакт</a>
  <div class="st m"><i class="dot"></i>${esc(S.city)} ${ar('right')} мир · UTC+5</div>
  <a class="go" href="#contact">ЗАКАЗАТЬ ПРОЕКТ ${ar('ne')}</a>
